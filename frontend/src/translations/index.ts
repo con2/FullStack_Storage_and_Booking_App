@@ -66,6 +66,7 @@ import { itemSummary } from "./modules/itemSummary";
 import { stepper } from "./modules/stepper";
 import { notifications } from "./modules/notifications";
 import { uiComponents } from "./modules/uiComponents";
+import { profilePicUploader } from "./modules/profilePicUploader";
 
 export const t = {
   stepper,
@@ -135,4 +136,5 @@ export const t = {
   termsOfUse,
   notifications,
   uiComponents,
+  profilePicUploader,
 };
