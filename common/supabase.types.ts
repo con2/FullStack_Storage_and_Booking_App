@@ -7,10 +7,30 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
   public: {
     Tables: {
@@ -694,42 +714,42 @@ export type Database = {
       }
       storage_items: {
         Row: {
+          available_quantity: number | null
           average_rating: number | null
           compartment_id: string | null
           created_at: string | null
           id: string
           is_active: boolean | null
           is_deleted: boolean | null
-          items_number_currently_in_storage: number | null
-          items_number_total: number
           location_id: string
           org_id: string
+          quantity: number
           translations: Json | null
         }
         Insert: {
+          available_quantity?: number | null
           average_rating?: number | null
           compartment_id?: string | null
           created_at?: string | null
           id?: string
           is_active?: boolean | null
           is_deleted?: boolean | null
-          items_number_currently_in_storage?: number | null
-          items_number_total: number
           location_id: string
           org_id: string
+          quantity: number
           translations?: Json | null
         }
         Update: {
+          available_quantity?: number | null
           average_rating?: number | null
           compartment_id?: string | null
           created_at?: string | null
           id?: string
           is_active?: boolean | null
           is_deleted?: boolean | null
-          items_number_currently_in_storage?: number | null
-          items_number_total?: number
           location_id?: string
           org_id?: string
+          quantity?: number
           translations?: Json | null
         }
         Relationships: [
@@ -1218,6 +1238,7 @@ export type Database = {
       }
       view_manage_storage_items: {
         Row: {
+          available_quantity: number | null
           created_at: string | null
           en_item_name: string | null
           en_item_type: string | null
@@ -1226,11 +1247,10 @@ export type Database = {
           id: string | null
           is_active: boolean | null
           is_deleted: boolean | null
-          items_number_currently_in_storage: number | null
-          items_number_total: number | null
           location_id: string | null
           location_name: string | null
           organization_id: string | null
+          quantity: number | null
           tag_ids: string[] | null
           tag_translations: Json[] | null
           translations: Json | null
@@ -1580,6 +1600,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       notification_channel: ["in_app", "web_push", "email"],
@@ -1617,3 +1640,4 @@ export const Constants = {
     },
   },
 } as const
+
