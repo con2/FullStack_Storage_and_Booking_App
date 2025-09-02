@@ -56,6 +56,7 @@ const UsersList = () => {
 
   // ————————————— State —————————————
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isAdding, setIsAdding] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   // Modal state management
@@ -75,8 +76,8 @@ const UsersList = () => {
   const isSuper = hasAnyRole(["super_admin", "superVera"]);
 
   useEffect(() => {
-    if (isSuper) fetchAllUsers();
-  }, [isSuper]);
+    fetchAllUsers();
+  }, []);
 
   // Determine if we should fetch all users (no org filter)
   // This happens when:
@@ -499,7 +500,7 @@ const UsersList = () => {
             <option value="all">{t.usersList.filters.roles.all[lang]}</option>
             {availableRoles.map((role) => (
               <option key={role.id} value={role.role}>
-                {role.role}
+                {formatRoleName(role.role)}
               </option>
             ))}
           </select>
